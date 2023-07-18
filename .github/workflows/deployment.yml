@@ -25,4 +25,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          
+      - name: Deploy to EC2
+        env:
+          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+          HOSTNAME: 100-27-20-80
+          USER_NAME: ubuntu
+        run: |
+          echo "$PRIVATE_KEY" > PRIVATE_KEY && chmod 600 PRIVATE_KEY
+          ssh -o StrictHostKeyChecking=no -i PRIVATE_KEY ${USER_NAME}@${HOSTNAME} 'sudo apt update && sudo apt install -y apache2'
 
