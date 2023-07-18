@@ -33,5 +33,6 @@ jobs:
           USER_NAME: ubuntu
         run: |
           echo "$PRIVATE_KEY" > PRIVATE_KEY && chmod 600 PRIVATE_KEY
-          ssh -o StrictHostKeyChecking=no -i PRIVATE_KEY ${USER_NAME}@${HOSTNAME} 'sudo apt update && sudo apt install -y apache2'
+          ssh -v -o StrictHostKeyChecking=no -i PRIVATE_KEY ${USER_NAME}@${HOSTNAME} 'sudo apt update && sudo apt install -y apache2'
+             apache2'
 
